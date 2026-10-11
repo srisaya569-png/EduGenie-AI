@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="EduGenie AI learning assistant">
+  <title>{{ app_name }} — Learning Assistant</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='/style.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/"> <span class="brand-icon">E</span> EduGenie </a>
+    <span class="top-note">Your AI learning companion</span>
+  </header>
+  <main class="container">
+    <section class="hero">
+      <p class="eyebrow">LEARN SMARTER</p>
+      <h1>What would you like to <span>learn today?</span></h1>
+      <p class="intro">Ask questions, simplify concepts, practice with quizzes, summarize notes, or build your learning roadmap.</p>
+      {% if demo_mode %}<div class="notice">Demo mode is enabled. Sample responses are shown; add a Gemini API key for AI-generated results.</div>{% endif %}
+    </section>
+
+    <section class="workspace">
+      <form id="task-form">
+        <label for="task">Choose a learning tool</label>
+        <div class="tool-grid">
+          <label class="tool-option"><input type="radio" name="task" value="qa" checked><span class="tool-icon">💬</span><span><b>Ask a question</b><small>Get a clear answer</small></span></label>
+          <label class="tool-option"><input type="radio" name="task" value="explain"><span class="tool-icon">💡</span><span><b>Explain a concept</b><small>Make it simple</small></span></label>
+          <label class="tool-option"><input type="radio" name="task" value="quiz"><span class="tool-icon">✍️</span><span><b>Generate a quiz</b><small>Test your knowledge</small></span></label>
+          <label class="tool-option"><input type="radio" name="task" value="summarize"><span class="tool-icon">📝</span><span><b>Summarize notes</b><small>Review key points</small></span></label>
+          <label class="tool-option"><input type="radio" name="task" value="learn"><span class="tool-icon">🧭</span><span><b>Learning path</b><small>Plan your progress</small></span></label>
+        </div>
+        <label for="text">Your question, topic, or study text</label>
+        <textarea id="text" name="text" rows="7" maxlength="20000" required placeholder="For example: Explain the water cycle in simple terms..."></textarea>
+        <div class="input-footer"><span id="char-count">0 / 20000</span><button id="submit-btn" type="submit">Generate answer <span aria-hidden="true">→</span></button></div>
+      </form>
+    </section>
+
+    <section id="result-section" class="result-section" hidden>
+      <div class="result-heading"><h2>Your learning result</h2><button id="copy-btn" class="secondary-btn" type="button">Copy text</button></div>
+      <div id="result" class="result-card" aria-live="polite"></div>
+    </section>
+    <p class="disclaimer">AI can make mistakes. Verify important information with trusted learning materials.</p>
+  </main>
+  <script src="{{ url_for('static', path='/app.js') }}" defer></script>
+</body>
+</html>
